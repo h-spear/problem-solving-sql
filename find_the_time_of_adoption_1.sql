@@ -1,0 +1,9 @@
+-- level2
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59412
+
+SELECT HOUR(DATETIME) AS HOUR
+     , COUNT(DATETIME) AS 'COUNT'
+  FROM ANIMAL_OUTS
+ GROUP BY HOUR(DATETIME)
+HAVING HOUR BETWEEN 9 AND 19
+ ORDER BY HOUR
