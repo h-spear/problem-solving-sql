@@ -1,4 +1,4 @@
--- level2f
+-- level2
 -- https://school.programmers.co.kr/learn/courses/30/lessons/131533
 
 SELECT P.PRODUCT_CODE AS PRODUCT_CODE
