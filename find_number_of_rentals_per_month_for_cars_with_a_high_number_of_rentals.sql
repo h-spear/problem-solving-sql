@@ -1,0 +1,19 @@
+-- level3
+-- https://school.programmers.co.kr/learn/courses/30/lessons/151139
+
+WITH COMP AS (
+    SELECT MONTH(START_DATE) AS MONTH
+         , CAR_ID
+         , COUNT(*) AS RECORDS
+      FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+     WHERE YEAR(START_DATE) = 2022 AND 
+           (MONTH(START_DATE) BETWEEN 8 AND 10)
+     GROUP BY MONTH(START_DATE), CAR_ID
+     ORDER BY MONTH(START_DATE), CAR_ID DESC
+)
+ 
+SELECT *
+  FROM COMP C1
+ WHERE (SELECT SUM(RECORDS) 
+          FROM COMP C2
+         WHERE C2.CAR_ID = C1.CAR_ID) >= 5;
