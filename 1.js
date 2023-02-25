@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-const programmers_dir = './programmers';
 const leetcode_dir = './leetcode';
+const programmers_dir = './programmers';
 const hackerrank_dir = './hacker-rank';
 
 const result = {
-    programmers: [],
     leetcode: [],
+    programmers: [],
     hackerrank: [],
 };
 
@@ -17,8 +17,8 @@ const output_file = 'readme.md';
 
 function check_condition(p) {
     if (
-        './' + p.name === programmers_dir ||
         './' + p.name === leetcode_dir ||
+        './' + p.name === programmers_dir ||
         './' + p.name === hackerrank_dir
     ) {
         return false;
@@ -34,6 +34,20 @@ function check_condition(p) {
     }
     return true;
 }
+
+// leetcode
+fs.readdirSync(leetcode_dir, { withFileTypes: true }).forEach((p) => {
+    const name = p.name;
+    const path = leetcode_dir + '/' + name;
+
+    if (!check_condition(p)) {
+        return;
+    }
+    result['leetcode'].push({
+        name,
+        length: fs.readdirSync(path).length,
+    });
+});
 
 // programmers
 fs.readdirSync(programmers_dir, { withFileTypes: true }).forEach((p) => {
@@ -69,6 +83,26 @@ if (!fs.existsSync(output_file)) {
 }
 
 fs.writeFileSync(output_file, '');
+
+// 리트코드
+let leetcode_sum = 0;
+fs.appendFileSync(
+    output_file,
+    '## Leetcode\n|    Difficulty    | solved |\n| :-------------: | :----: |\n',
+    'utf-8'
+);
+result['leetcode'].forEach((v) => {
+    const { name, length } = v;
+    temp = '|' + name + '|' + length + '|\n';
+    leetcode_sum += length;
+    fs.appendFileSync(output_file, temp, 'utf-8');
+});
+fs.appendFileSync(
+    output_file,
+    '| **sum** | **' + leetcode_sum + '**|\n\n',
+    'utf-8'
+);
+console.log('leetcode solved ' + leetcode_sum + '!');
 
 // 프로그래머스
 let programmers_sum = 0;

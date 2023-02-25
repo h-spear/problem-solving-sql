@@ -1,3 +1,11 @@
+## Leetcode
+|    Difficulty    | solved |
+| :-------------: | :----: |
+|easy|72|
+|hard|13|
+|medium|43|
+| **sum** | **128**|
+
 ## Programmers
 |    Level    | solved |
 | :-------------: | :----: |
