@@ -1,29 +1,46 @@
 const fs = require('fs');
 
-const home_dir = './';
+const programmers_dir = './programmers';
+const leetcode_dir = './leetcode';
+const hackerrank_dir = './leetcode';
 
-const result = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-const except_list = ['1.js', 'README.md'];
-const output_file = 'README.md';
+const result = {
+    programmers: [],
+    leetcode: [],
+    hackerrank: [],
+};
 
-function check_condition(name) {
-    if (name[0] === '.') {
+const output_file = 'readme.md';
+
+function check_condition(p) {
+    if (
+        './' + p.name === programmers_dir ||
+        './' + p.name === leetcode_dir ||
+        './' + p.name === hackerrank_dir
+    ) {
         return false;
     }
-    if (except_list.includes(name)) {
+    if (!p.isDirectory()) {
+        return false;
+    }
+    if (p.name[0] == '.') {
         return false;
     }
     return true;
 }
 
-fs.readdirSync(home_dir, { withFileTypes: true }).forEach((p) => {
+// programmers
+fs.readdirSync(programmers_dir, { withFileTypes: true }).forEach((p) => {
     const name = p.name;
-    if (!check_condition(name)) {
+    const path = programmers_dir + '/' + name;
+
+    if (!check_condition(p)) {
         return;
     }
-    const first_line = fs.readFileSync(name).toString().split('\n')[0];
-    const level = first_line[8];
-    result[level]++;
+    result['programmers'].push({
+        name,
+        length: fs.readdirSync(path).length,
+    });
 });
 
 // write md file
@@ -32,19 +49,25 @@ if (!fs.existsSync(output_file)) {
 }
 
 fs.writeFileSync(output_file, '');
-fs.appendFileSync(output_file, `## Programmers\n`, 'utf-8');
-fs.appendFileSync(output_file, `|  level  | solved |\n`, 'utf-8');
-fs.appendFileSync(output_file, `| :-----: | :----: |\n`, 'utf-8');
-total_sum = 0;
-for (let lv = 1; lv <= 5; lv++) {
-    temp = '|' + lv + '|' + result[lv] + '|\n';
-    total_sum += result[lv];
-    fs.appendFileSync(output_file, temp, 'utf-8');
-    console.log(`level${lv} solved ${result[lv]}`);
-}
+
+// 프로그래머스
+let programmers_sum = 0;
 fs.appendFileSync(
     output_file,
-    '| **sum** | **' + total_sum + '**|\n\n',
+    '## Programmers\n|    Level    | solved |\n| :-------------: | :----: |\n',
     'utf-8'
 );
-console.log(` total solved ${total_sum}!`);
+result['programmers'].forEach((v) => {
+    const { name, length } = v;
+    temp = '|' + name + '|' + length + '|\n';
+    programmers_sum += length;
+    fs.appendFileSync(output_file, temp, 'utf-8');
+});
+fs.appendFileSync(
+    output_file,
+    '| **sum** | **' + programmers_sum + '**|\n\n',
+    'utf-8'
+);
+console.log('programmers solved ' + programmers_sum + '!');
+
+console.log('saved successfully! ' + output_file);
