@@ -8,3 +8,14 @@
 |level5|1|
 | **sum** | **71**|
 
+## HackerRank
+|    subdomain    | solved |
+| :-------------: | :----: |
+|advanced-join|5|
+|advanced-select|5|
+|aggregation|17|
+|alternative-queries|3|
+|basic-join|8|
+|basic-select|20|
+| **sum** | **58**|
+

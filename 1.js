@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const programmers_dir = './programmers';
 const leetcode_dir = './leetcode';
-const hackerrank_dir = './leetcode';
+const hackerrank_dir = './hacker-rank';
 
 const result = {
     programmers: [],
@@ -10,6 +10,9 @@ const result = {
     hackerrank: [],
 };
 
+const except_list = ['certificate'];
+
+console.log('certificate' in except_list);
 const output_file = 'readme.md';
 
 function check_condition(p) {
@@ -18,6 +21,9 @@ function check_condition(p) {
         './' + p.name === leetcode_dir ||
         './' + p.name === hackerrank_dir
     ) {
+        return false;
+    }
+    if (except_list.includes(p.name)) {
         return false;
     }
     if (!p.isDirectory()) {
@@ -38,6 +44,20 @@ fs.readdirSync(programmers_dir, { withFileTypes: true }).forEach((p) => {
         return;
     }
     result['programmers'].push({
+        name,
+        length: fs.readdirSync(path).length,
+    });
+});
+
+// hackerrank
+fs.readdirSync(hackerrank_dir, { withFileTypes: true }).forEach((p) => {
+    const name = p.name;
+    const path = hackerrank_dir + '/' + name;
+
+    if (!check_condition(p)) {
+        return;
+    }
+    result['hackerrank'].push({
         name,
         length: fs.readdirSync(path).length,
     });
@@ -69,5 +89,25 @@ fs.appendFileSync(
     'utf-8'
 );
 console.log('programmers solved ' + programmers_sum + '!');
+
+// 해커랭크
+let hackerrank_sum = 0;
+fs.appendFileSync(
+    output_file,
+    '## HackerRank\n|    subdomain    | solved |\n| :-------------: | :----: |\n',
+    'utf-8'
+);
+result['hackerrank'].forEach((v) => {
+    const { name, length } = v;
+    temp = '|' + name + '|' + length + '|\n';
+    hackerrank_sum += length;
+    fs.appendFileSync(output_file, temp, 'utf-8');
+});
+fs.appendFileSync(
+    output_file,
+    '| **sum** | **' + hackerrank_sum + '**|\n\n',
+    'utf-8'
+);
+console.log('hacker rank solved ' + hackerrank_sum + '!');
 
 console.log('saved successfully! ' + output_file);
