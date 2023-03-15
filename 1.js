@@ -12,7 +12,6 @@ const result = {
 
 const except_list = ['certificate'];
 
-console.log('certificate' in except_list);
 const output_file = 'readme.md';
 
 function check_condition(p) {
