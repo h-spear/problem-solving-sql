@@ -2,9 +2,9 @@
 |    Difficulty    | solved |
 | :-------------: | :----: |
 |easy|80|
-|hard|13|
+|hard|16|
 |medium|60|
-| **sum** | **153**|
+| **sum** | **156**|
 
 ## Programmers
 |    Level    | solved |
