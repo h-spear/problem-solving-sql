@@ -3,8 +3,8 @@
 | :-------------: | :----: |
 |easy|88|
 |hard|16|
-|medium|60|
-| **sum** | **164**|
+|medium|65|
+| **sum** | **169**|
 
 ## Programmers
 |    Level    | solved |
