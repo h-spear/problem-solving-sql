@@ -1,10 +1,10 @@
 ## Leetcode
 |    Difficulty    | solved |
 | :-------------: | :----: |
-|easy|88|
+|easy|90|
 |hard|17|
 |medium|65|
-| **sum** | **170**|
+| **sum** | **172**|
 
 ## Programmers
 |    Level    | solved |
