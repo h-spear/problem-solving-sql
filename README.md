@@ -9,12 +9,12 @@
 ## Programmers
 |    Level    | solved |
 | :-------------: | :----: |
-|level1|24|
+|level1|27|
 |level2|23|
 |level3|14|
 |level4|14|
 |level5|1|
-| **sum** | **76**|
+| **sum** | **79**|
 
 ## HackerRank
 |    subdomain    | solved |
