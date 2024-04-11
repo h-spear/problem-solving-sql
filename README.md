@@ -10,11 +10,11 @@
 |    Level    | solved |
 | :-------------: | :----: |
 |level1|31|
-|level2|33|
+|level2|36|
 |level3|14|
 |level4|14|
 |level5|1|
-| **sum** | **93**|
+| **sum** | **96**|
 
 ## HackerRank
 |    subdomain    | solved |
