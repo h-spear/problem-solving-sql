@@ -12,9 +12,9 @@
 |level1|31|
 |level2|36|
 |level3|21|
-|level4|14|
+|level4|15|
 |level5|1|
-| **sum** | **103**|
+| **sum** | **104**|
 
 ## HackerRank
 |    subdomain    | solved |
