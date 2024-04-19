@@ -1,0 +1,28 @@
+-- level5
+-- https://school.programmers.co.kr/learn/courses/30/lessons/301651
+
+WITH RECURSIVE GENERATION_DATA AS (
+    SELECT ID
+         , PARENT_ID
+         , 1 AS GENERATION
+      FROM ECOLI_DATA
+     WHERE PARENT_ID IS NULL
+    
+     UNION ALL
+    
+    SELECT E.ID 
+         , E.PARENT_ID
+         , G.GENERATION + 1 
+      FROM ECOLI_DATA E
+      JOIN GENERATION_DATA G
+        ON E.PARENT_ID = G.ID
+)
+
+SELECT COUNT(G.ID) AS `COUNT`
+     , GENERATION
+  FROM GENERATION_DATA G
+  LEFT JOIN ECOLI_DATA E
+    ON G.ID = E.PARENT_ID
+ WHERE E.ID IS NULL
+ GROUP BY GENERATION
+ ORDER BY GENERATION;
